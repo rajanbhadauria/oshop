@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-6">
+    <form #f="ngForm" class="form-horizontal" (ngSubmit)="saveProduct(f.value)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input [(ngModel)]="product.title" #title="ngModel" id="title" name="title" type="text" class="form-control" required>
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+          Title field is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">₹</span>
+          </div>
+          <input [(ngModel)]="product.price" #price="ngModel" name="price" id="price" type="number" class="form-control" [min]="0" required>
+
+        </div>
+        <div class="alert alert-danger" *ngIf="price.touched && price.invalid" number>
+          <div *ngIf="price.errors.required">Price is required.</div>
+          <div *ngIf="price.errors.number"> Must be valid number.</div>
+          <div *ngIf="price.errors.min"> Must be greater or equal 0.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select #category="ngModel" required [(ngModel)]="product.category" name="category" id="category" class="form-control">
+          <option value=""></option>
+          <option *ngFor="let c of categories$ | async " [value]="c.key">
+            {{c.name}}
+          </option>
+
+        </select>
+        <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
+          Category is required.
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label for="image_url">Image Url</label>
+        <input #image_url="ngModel" required [(ngModel)]="product.image_url" name="image_url" id="image_url" type="text" class="form-control" url>
+        <div class="alert alert-danger" *ngIf="image_url.touched && image_url.invalid">
+          <div *ngIf="image_url.errors.required"> Image Url is required.</div>
+          <div *ngIf="image_url.errors.url"> Must be valid URL.</div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary">Save</button>
+        <button *ngIf="id" class="btn btn-danger" (click)="removeProduct(id)" type="button">Delete</button>
+      </div>
+
+    </form>
+  </div>
+  <div class="col-6">
+    <product-card [product]='product' [show-actions]="false"></product-card>
+  </div>
+</div>

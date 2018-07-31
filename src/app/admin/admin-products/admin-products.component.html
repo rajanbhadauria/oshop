@@ -1,0 +1,22 @@
+<p>
+  <a routerLink="/admin/products/new" class="btn btn-primary">Add Product</a>
+</p>
+<p>
+  <input type="text" #key (keyup)="searchProduct(key.value)" class="form-control" placeholder="Search Product">
+</p>
+<data-table id="product-grid" headerTitle="Products" [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
+  <data-table-column [property]="'title'" [header]="'Title'" [sortable]="true" [resizable]="true">
+  </data-table-column>
+  <data-table-column [property]="'price'" [header]="'price'" [sortable]="true" [resizable]="true">
+    <ng-template #dataTableCell let-item="item">
+      {{ item.price | currency:"INR":true}}
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column [property]="'key'" [header]="''" [resizable]="true">
+    <ng-template #dataTableCell let-item="item">
+        <a [routerLink]="['/admin/products/', item.key ]">Edit</a>
+    </ng-template>
+  </data-table-column>
+</data-table>
+

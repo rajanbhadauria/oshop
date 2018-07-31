@@ -1,0 +1,29 @@
+<h1>My Shopping Cart</h1>
+<ng-container *ngIf="cart$ | async as cart; else  noItemFound">
+  <p>Total Items in cart {{cart.totalItemsCounts}}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cart.items">
+        <td>{{ item.product.title }}</td>
+        <td><product-quantity [product]="item.product" [shopping-cart]="cart"></product-quantity></td>
+        <td>{{ item.totalPrice | currency:'INR' }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>{{ cart.cartTotal | currency:'INR'}}</th>
+      </tr>
+    </tfoot>
+  </table>
+</ng-container>
+<ng-template #noItemFound>Product not found</ng-template>
+
