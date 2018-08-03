@@ -29,9 +29,11 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { OrderService } from './services/order.service';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 
 @NgModule({
   declarations: [
@@ -49,10 +51,11 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     ProductFormComponent,
     ProductFilterComponent,
     ProductCardComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    ShoppingCartSummaryComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     FormsModule,
     CustomFormsModule,
     DataTableModule.forRoot(),
@@ -68,7 +71,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
-      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
+      { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       {
         path: 'admin/products/new',
         component: ProductFormComponent,
@@ -91,7 +94,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
       },
     ])
   ],
-  providers: [AuthService, AuthGuard, UserService, AdminAuthGaurd, CategoryService, ProductService, ShoppingCartService],
+  providers: [AuthService, AuthGuard, UserService, AdminAuthGaurd, CategoryService, ProductService, ShoppingCartService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

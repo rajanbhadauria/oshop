@@ -3,10 +3,14 @@ import { Product } from './product';
 
 export class ShoppingCart {
     items: Item[] = [];
-    constructor(public itemsMap: {[productId: string]: Item}) {
+    constructor(private itemsMap) {
+        this.itemsMap = itemsMap || {};
         for(let productId in itemsMap) {
             const item = itemsMap[productId];
-            this.items.push(new Item(item.product, item.quantity));
+            const x = new Item();
+            Object.assign(x, item);
+            x.key = productId;
+            this.items.push(x);
         }
             
     }

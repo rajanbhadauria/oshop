@@ -9,21 +9,35 @@ import { ShoppingCart } from './../models/shopping-cart';
 @Injectable()
 export class ShoppingCartService {
 
-  constructor(private db: AngularFireDatabase) { }
-
-  private create() {
-    return this.db.list('/shopping-carts').push({ dateCreated: new Date().getTime() });
-  }
+  constructor(private db: AngularFireDatabase) { } 
 
   async getCart(): Promise<Observable<ShoppingCart>> {
     const cartId = await this.getOrCreateCart();
     return this.db.object('/shopping-carts/' + cartId)
       .valueChanges().map(x => {
-        let y = x as ShoppingCart;
-        console.log(y);
+        let y= x as ShoppingCart;
         return new ShoppingCart(y.items);
       });
   }
+
+  async clearCart()
+  {
+    const cartId = await this.getOrCreateCart();
+    this.db.object('/shopping-carts/'+ cartId + '/items').remove();
+  }
+
+  async addToCart(product: Product) {
+    this.updateCartItem(product, 1);
+  }
+
+  async removeToCart(product: Product) {
+    this.updateCartItem(product, -1);
+  }
+
+  private create() {
+    return this.db.list('/shopping-carts').push({ dateCreated: new Date().getTime() });
+  }
+
 
   private getItem(cartId: string, productId: string) {
     return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
@@ -39,14 +53,7 @@ export class ShoppingCartService {
     return result.key;
   }
 
-  async addToCart(product: Product) {
-    this.updateCartItem(product, 1);
-  }
-
-  async removeToCart(product: Product) {
-    this.updateCartItem(product, -1);
-  }
-
+  
   private async updateCartItem(product: Product, change: number) {
     const cartId = await this.getOrCreateCart();
     // checking product is exists in cart or not.
@@ -54,7 +61,18 @@ export class ShoppingCartService {
     item$.valueChanges().pipe(take(1)).subscribe(item => {
       const newItem = item as Item;
       const qty = (newItem) ? newItem.quantity : 0;
-      item$.update({ product: product, quantity: qty + change });
+      const qunatity = qty + change;
+      if (qunatity === 0)
+        item$.remove();
+      else {
+          item$.update({ 
+            title: product.title,
+            price: product.price,
+            image_url: product.image_url,
+            quantity: qunatity
+          });
+      }
+      
     });
   }
 }

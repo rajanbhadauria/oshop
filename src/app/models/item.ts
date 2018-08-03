@@ -4,12 +4,10 @@ export class Item {
   key: string;
   title: string;
   price: number;
-  image_url: string;
-
-  constructor(public product: Product, public quantity: number) {
-  }
+  image_url: string; 
+  quantity: number;
 
   get totalPrice() {
-    return this.product.price * this.quantity;
+    return this.price * this.quantity;
   }
 }
