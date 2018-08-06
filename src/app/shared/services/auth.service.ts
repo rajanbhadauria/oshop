@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppUser } from './models/app-user';
+import { AppUser } from 'shared/models/app-user';
 import { UserService } from './user.service';
 import 'rxjs/add/operator/switchMap';
 import { of } from 'rxjs';
@@ -30,6 +30,7 @@ export class AuthService {
 
   logout() {
     this.authFire.auth.signOut();
+    this.route.navigateByUrl('/');
   }
 
   get appUser$(): Observable<AppUser>
