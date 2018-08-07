@@ -31,10 +31,9 @@ import { ProductService } from 'shared/services/product.service';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 import { OrderService } from 'shared/services/order.service';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductCardComponent } from './product-card/product-card.component';
-import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { SharedModule } from 'shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -50,9 +49,7 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
-    ProductFilterComponent,
-    ProductCardComponent,
-    ProductQuantityComponent,
+    ProductFilterComponent,    
     ShoppingCartSummaryComponent,
     ShippingFormComponent
   ],
@@ -60,6 +57,7 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
   BrowserModule,
     FormsModule,
     CustomFormsModule,
+    SharedModule,
     DataTableModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
