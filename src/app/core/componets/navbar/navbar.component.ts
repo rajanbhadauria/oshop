@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   appUser: AppUser;
   cartItemsCount: number;
   carts$: Observable<ShoppingCart>;
+  showNav: boolean = false;
   constructor(public auth: AuthService, private cartService: ShoppingCartService) {
   }
 
@@ -24,5 +25,10 @@ export class NavbarComponent implements OnInit {
     this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
     this.carts$ = await this.cartService.getCart();
   }
+  toggleNav()
+  {
+    this.showNav = !this.showNav;
+  }
+
 }
 

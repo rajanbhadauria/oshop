@@ -26,12 +26,13 @@ import { OrderService } from 'shared/services/order.service';
 import { SharedModule } from 'shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ShoppingModule } from './shopping/shopping.module';
-import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    
+    NavbarComponent,
+    HomeComponent,
+    LoginComponent,
     ProductsComponent,
   ],
   imports: [
@@ -41,7 +42,6 @@ import { CoreModule } from './core/core.module';
     SharedModule,
     AdminModule,
     ShoppingModule,
-    CoreModule,
     DataTableModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
