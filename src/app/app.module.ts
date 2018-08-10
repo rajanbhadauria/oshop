@@ -11,10 +11,10 @@ import { CustomFormsModule } from 'ng2-validation';
 import { DataTableModule } from 'angular5-data-table';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './core/componets/navbar/navbar.component';
+import { HomeComponent } from './core/componets/home/home.component';
 import { ProductsComponent } from './shopping/components/products/products.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './core/componets/login/login.component';
 import { AuthService } from 'shared/services/auth.service';
 import { AuthGuard } from 'shared/services/auth-guard.service';
 import { UserService } from 'shared/services/user.service';
@@ -26,13 +26,12 @@ import { OrderService } from 'shared/services/order.service';
 import { SharedModule } from 'shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ShoppingModule } from './shopping/shopping.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    LoginComponent,
+    
     ProductsComponent,
   ],
   imports: [
@@ -42,6 +41,7 @@ import { ShoppingModule } from './shopping/shopping.module';
     SharedModule,
     AdminModule,
     ShoppingModule,
+    CoreModule,
     DataTableModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

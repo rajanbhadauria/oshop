@@ -18,7 +18,7 @@ import { ShippingFormComponent } from './components/shipping-form/shipping-form.
     CommonModule,
     SharedModule,
     FormsModule,
-    RouterModule.forRoot([
+    RouterModule.forChild([
       { path: 'products', component: ProductsComponent },
 
       { path: 'shopping-cart', component: ShoppingCartComponent },
