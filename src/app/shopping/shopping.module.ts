@@ -9,11 +9,15 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { AuthGuard } from 'shared/services/auth-guard.service';
+import { FormsModule } from '@angular/forms';
+import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: 'products', component: ProductsComponent },
 
@@ -24,15 +28,19 @@ import { AuthGuard } from 'shared/services/auth-guard.service';
     ])
   ],
   declarations: [
-    ProductsComponent,
     ShoppingCartComponent,
-    MyOrdersComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent,
+    ProductFilterComponent,
     CheckOutComponent,
     OrderSuccessComponent,
-    ProductFilterComponent
+    MyOrdersComponent, 
   ],
   exports: [
-   // ShoppingCartComponent
+    //ProductsComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent,
+    ProductFilterComponent
   ]
 })
 export class ShoppingModule { }

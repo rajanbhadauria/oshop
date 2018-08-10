@@ -14,10 +14,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './shopping/components/products/products.component';
-//import { ShoppingCartComponent } from './shopping/components/shopping-cart/shopping-cart.component';
-import { CheckOutComponent } from './shopping/components/check-out/check-out.component';
-import { OrderSuccessComponent } from './shopping/components/order-success/order-success.component';
-import { MyOrdersComponent } from './shopping/components/my-orders/my-orders.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from 'shared/services/auth.service';
 import { AuthGuard } from 'shared/services/auth-guard.service';
@@ -27,9 +23,6 @@ import { CategoryService } from 'shared/services/category.service';
 import { ProductService } from 'shared/services/product.service';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 import { OrderService } from 'shared/services/order.service';
-import { ProductFilterComponent } from './shopping/components/products/product-filter/product-filter.component';
-import { ShoppingCartSummaryComponent } from './shopping/components/shopping-cart-summary/shopping-cart-summary.component';
-import { ShippingFormComponent } from './shopping/components/shipping-form/shipping-form.component';
 import { SharedModule } from 'shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ShoppingModule } from './shopping/shopping.module';
@@ -39,14 +32,8 @@ import { ShoppingModule } from './shopping/shopping.module';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    //ProductsComponent,
-    //CheckOutComponent,
-    //OrderSuccessComponent,
-    //MyOrdersComponent,
     LoginComponent,
-    //ProductFilterComponent,    
-    //ShoppingCartSummaryComponent,
-    //ShippingFormComponent
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +48,7 @@ import { ShoppingModule } from './shopping/shopping.module';
     AngularFireAuthModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: ProductsComponent },
       { path: 'login', component: LoginComponent },
 
       ])
